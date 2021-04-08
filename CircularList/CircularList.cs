@@ -115,11 +115,7 @@ namespace CircularList
             return GetEnumerator();
         }
 
-        public void Add(T item)
-        {
-            ((ICollection<T>)list).Add(item);
-            currentIndex++;
-        }
+        public void Add(T item) => ((ICollection<T>)list).Add(item);
 
         public void Clear()
         {
@@ -142,11 +138,6 @@ namespace CircularList
             ((ICollection<T>)list).CopyTo(array, arrayIndex);
         }
 
-        public bool Remove(T item)
-        {
-            var result = ((ICollection<T>)list).Remove(item);
-            currentIndex--;
-            return result;
-        }
+        public bool Remove(T item) => ((ICollection<T>)list).Remove(item);
     }
 }

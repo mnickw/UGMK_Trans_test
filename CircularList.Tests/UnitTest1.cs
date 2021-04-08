@@ -9,9 +9,12 @@ namespace CircularList.Tests
         //readme
         //посмотреть какие еще методы и свойства есть у дефолтного листа
 
-        //1
+        //Done:
 
-        
+        //index
+        // три, цикличные индексы работают (несколько тестов)
+        // пустой лист - искл при индексе
+        // отриц - искл
 
         //Current
         // искл при пустом
@@ -26,6 +29,8 @@ namespace CircularList.Tests
         // искл при пустом
         // 012 1
         // 0 0
+
+        //1
 
         //MoveNext
         // искл
@@ -83,12 +88,5 @@ namespace CircularList.Tests
         // clear - empty
 
         //остальные
-
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        
     }
 }
