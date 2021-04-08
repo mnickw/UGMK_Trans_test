@@ -96,8 +96,10 @@ namespace CircularList
         public void Insert(int index, T item)
         {
             if (index != 0)
+            {
                 ThrowInvalidOperationIfListIsEmpty();
-            ThrowArgumentOutOfRangeIfIndexIsNegative(index);
+                ThrowArgumentOutOfRangeIfIndexIsNegative(index);
+            }
             ((IList<T>)list).Insert(index % list.Count, item);
         }
 
