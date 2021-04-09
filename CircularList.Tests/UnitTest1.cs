@@ -30,8 +30,6 @@ namespace CircularList.Tests
         // 012 1
         // 0 0
 
-        //1
-
         //MoveNext
         // искл
         //MN+C P N
@@ -51,6 +49,8 @@ namespace CircularList.Tests
         // 012 mbmn 0 2 1
         // 012 mnmb 0 2 1
         // 012 mnmn mnmb 2 1 0
+
+        //TODO1:
 
         //foreach
         // пустой при пустом листе
@@ -76,7 +76,7 @@ namespace CircularList.Tests
 
         // overflow
 
-        //2
+        //TODO2:
 
         //Add
         // можно добавить и нулевой элемент будет присут
