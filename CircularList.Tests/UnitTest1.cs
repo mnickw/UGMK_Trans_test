@@ -4,12 +4,12 @@ namespace CircularList.Tests
 {
     public class Tests
     {
-        //xml
-        //unit
-        //readme
+        //xml - 1 час
+        //unit - 1 час 30 мин
+        //readme - 1 час
         //посмотреть какие еще методы и свойства есть у дефолтного листа
 
-        //Done:
+        /*Done:
 
         //index
         // три, цикличные индексы работают (несколько тестов)
@@ -48,9 +48,9 @@ namespace CircularList.Tests
         //mb+mn
         // 012 mbmn 0 2 1
         // 012 mnmb 0 2 1
-        // 012 mnmn mnmb 2 1 0
+        // 012 mnmn mnmb 2 1 0*/
 
-        //TODO1:
+        /*TODO1:
 
         //foreach
         // пустой при пустом листе
@@ -74,7 +74,7 @@ namespace CircularList.Tests
         // 0 0,1,2,3 add 0
         // 012 2 add 012
 
-        // overflow
+        // overflow*/
 
         //TODO2:
 
