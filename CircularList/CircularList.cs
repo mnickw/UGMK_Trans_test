@@ -99,8 +99,9 @@ namespace CircularList
             {
                 ThrowInvalidOperationIfListIsEmpty();
                 ThrowArgumentOutOfRangeIfIndexIsNegative(index);
+                ((IList<T>)list).Insert(index % list.Count, item);
             }
-            ((IList<T>)list).Insert(index % list.Count, item);
+            else ((IList<T>)list).Insert(index, item);
         }
 
         public void RemoveAt(int index)
