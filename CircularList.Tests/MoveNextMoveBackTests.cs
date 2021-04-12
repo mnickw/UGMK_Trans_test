@@ -19,7 +19,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveNext_WhenAddThreeItemsAndOneMoveNext_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveNext();
 
@@ -29,7 +29,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveNext_WhenAddThreeItemsAndTwoMoveNext_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveNext();
             list.MoveNext();
@@ -40,7 +40,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveNext_WhenAddThreeItemsAndThreeMoveNext_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveNext();
             list.MoveNext();
@@ -52,7 +52,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveNext_WhenAddThreeItemsAndTwoMoveNextAndAddItem_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveNext();
             list.MoveNext();
@@ -64,7 +64,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveNext_WhenAddThreeItemsAndTwoMoveNextAndAddItemAndOneMoveNext_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveNext();
             list.MoveNext();
@@ -87,7 +87,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveBack_WhenAddThreeItemsAndOneMoveBack_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveBack();
 
@@ -97,7 +97,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveBack_WhenAddThreeItemsAndTwoMoveBack_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveBack();
             list.MoveBack();
@@ -108,7 +108,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveBack_WhenAddThreeItemsAndThreeMoveBack_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveBack();
             list.MoveBack();
@@ -120,7 +120,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveBack_WhenAddThreeItemsAndOneMoveBackAndAddItem_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveBack();
             list.Add(3);
@@ -131,7 +131,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveNextAndMoveBack_WhenAddThreeItemsAndOneMoveBackOneMoveNext_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveBack();
             list.MoveNext();
@@ -142,7 +142,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveNextAndMoveBack_WhenAddThreeItemsAndOneMoveNextOneMoveBack_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveNext();
             list.MoveBack();
@@ -153,7 +153,7 @@ namespace CircularList.Tests
         [Test]
         public void MoveNextAndMoveBack_WhenAddThreeItemsAndThreeMoveNextOneMoveBack_CurrentAndPreviousAndNextWorksGood()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             list.MoveNext();
             list.MoveNext();

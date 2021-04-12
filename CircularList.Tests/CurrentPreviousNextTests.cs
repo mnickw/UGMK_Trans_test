@@ -19,7 +19,7 @@ namespace CircularList.Tests
         [Test]
         public void Current_WhenJustAddFewItems_ReturnsFirstItem()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             var actualValue = list.Current;
 
@@ -39,7 +39,7 @@ namespace CircularList.Tests
         [Test]
         public void Previous_WhenJustAddFewItems_ReturnsLastItem()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             var actualValue = list.Previous;
 
@@ -70,7 +70,7 @@ namespace CircularList.Tests
         [Test]
         public void Next_WhenJustAddFewItems_ReturnsSecondItem()
         {
-            var list = CreateListAndAddThreeItems();
+            var list = new CircularList<int>() { 0, 1, 2 };
 
             var actualValue = list.Next;
 

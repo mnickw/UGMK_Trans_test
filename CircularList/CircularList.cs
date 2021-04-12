@@ -1,144 +1,108 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CircularList
 {
-    public class CircularList<T> : ICircularList<T>
+    /// <typeparam name="T">The type of elements in the circular list.</typeparam>
+    /// <inheritdoc cref="ICircularList{T}"/>
+    public class CircularList<T> : Collection<T>, ICircularList<T>
     {
-        private List<T> list;
-        private int currentIndex;
+        private int? currentIndex;
 
-        public CircularList()
-        {
-            list = new List<T>();
-            currentIndex = 0;
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CircularList{T}"/> class that is empty.
+        /// </summary>
+        public CircularList() : base() { }
 
         void ThrowInvalidOperationIfListIsEmpty()
         {
-            if (list.Count == 0)
+            if (Count == 0)
                 throw new InvalidOperationException("Circular list is empty.");
         }
-        void ThrowArgumentOutOfRangeIfIndexIsNegative(int index)
-        {
-            if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index), index, "The index cannot be negative.");
-        }
 
-        public T this[int index]
-        {
-            get
-            {
-                ThrowInvalidOperationIfListIsEmpty();
-                ThrowArgumentOutOfRangeIfIndexIsNegative(index);
-                return ((IList<T>)list)[index % list.Count];
-            }
 
-            set
-            {
-                ThrowInvalidOperationIfListIsEmpty();
-                ThrowArgumentOutOfRangeIfIndexIsNegative(index);
-                ((IList<T>)list)[index % list.Count] = value;
-            }
-        }
-
-        public int Count => ((ICollection<T>)list).Count;
-
-        public bool IsReadOnly => ((ICollection<T>)list).IsReadOnly;
-
+        /// <exception cref="InvalidOperationException">If circular list is empty.</exception>
+        /// <inheritdoc />
         public T Current
         {
             get
             {
                 ThrowInvalidOperationIfListIsEmpty();
-                return list[currentIndex];
+                return this[currentIndex.Value];
             }
         }
 
+        /// <exception cref="InvalidOperationException">If circular list is empty.</exception>
+        /// <inheritdoc />
         public T Previous
         {
             get
             {
                 ThrowInvalidOperationIfListIsEmpty();
-                return currentIndex == 0 ? list[list.Count - 1] : list[currentIndex - 1];
+                return currentIndex == 0 ? this[Count - 1] : this[currentIndex.Value - 1];
             }
         }
 
+        /// <exception cref="InvalidOperationException">If circular list is empty.</exception>
+        /// <inheritdoc />
         public T Next
         {
             get
             {
                 ThrowInvalidOperationIfListIsEmpty();
-                return list[(currentIndex + 1) % list.Count];
+                return this[(currentIndex.Value + 1) % Count];
             }
         }
 
+        /// <exception cref="InvalidOperationException">If circular list is empty.</exception>
+        /// <inheritdoc />
         public void MoveBack()
         {
             ThrowInvalidOperationIfListIsEmpty();
-            currentIndex = currentIndex == 0 ? list.Count - 1 : currentIndex - 1;
+            currentIndex = currentIndex == 0 ? Count - 1 : currentIndex - 1;
         }
 
+        /// <exception cref="InvalidOperationException">If circular list is empty.</exception>
+        /// <inheritdoc />
         public void MoveNext()
         {
             ThrowInvalidOperationIfListIsEmpty();
-            currentIndex = (currentIndex + 1) % list.Count;
-        }        
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            for (int i = 0; i < list.Count; i = (i + 1) % list.Count)
-                yield return list[i];
+            currentIndex = (currentIndex + 1) % Count;
         }
 
-        // отличается от поведения листа
-        public void Insert(int index, T item)
+        protected override void InsertItem(int index, T item)
         {
-            if (index != 0)
+            base.InsertItem(index, item);
+            if (!currentIndex.HasValue)
             {
-                ThrowInvalidOperationIfListIsEmpty();
-                ThrowArgumentOutOfRangeIfIndexIsNegative(index);
-                ((IList<T>)list).Insert(index % list.Count, item);
+                currentIndex = 0;
+                return;
             }
-            else ((IList<T>)list).Insert(index, item);
+            if (index <= currentIndex)
+                currentIndex++;
         }
 
-        public void RemoveAt(int index)
+        protected override void RemoveItem(int index)
         {
-            ThrowInvalidOperationIfListIsEmpty();
-            ThrowArgumentOutOfRangeIfIndexIsNegative(index);
-            ((IList<T>)list).RemoveAt(index % list.Count);
+            base.RemoveItem(index);
+            if (index <= currentIndex)
+                if (currentIndex == 0)
+                    if (Count == 0)
+                        currentIndex = null;
+                    else
+                        currentIndex = Count - 1;
+                else
+                    currentIndex--;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        protected override void ClearItems()
         {
-            return GetEnumerator();
+            base.ClearItems();
+            currentIndex = null;
         }
-
-        public void Add(T item) => ((ICollection<T>)list).Add(item);
-
-        public void Clear()
-        {
-            ((ICollection<T>)list).Clear();
-            currentIndex = 0;
-        }
-
-        public bool Contains(T item)
-        {
-            return ((ICollection<T>)list).Contains(item);
-        }        
-
-        public int IndexOf(T item)
-        {
-            return ((IList<T>)list).IndexOf(item);
-        }
-
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            ((ICollection<T>)list).CopyTo(array, arrayIndex);
-        }
-
-        public bool Remove(T item) => ((ICollection<T>)list).Remove(item);
     }
 }
